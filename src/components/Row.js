@@ -21,9 +21,12 @@ var Row = React.createClass({
     var row = this.props.row;
 
     return (
-      <tr>
-        {this.generateSquares()}
-      </tr>
+      <div className="row">
+        <div className="one-half column offset-by-three">
+          {this.generateSquares()}
+          <div className="u-cf"></div>
+        </div>
+      </div>
     );
   }
 });

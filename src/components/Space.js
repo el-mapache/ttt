@@ -2,14 +2,14 @@ var React = require('react');
 
 var Space = React.createClass({
   render: function() {
-    var classes = '';
+    var classes = 'one-third column game__cell';
 
     if (this.props.locked || this.props.marker) {
       classes += ' cell-locked';
     }
 
     return (
-      <td className={classes} onClick={this.handleClick}>{this.props.marker}</td>
+      <div className={classes} onClick={this.handleClick}>{this.props.marker}</div>
     );
   },
 

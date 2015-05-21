@@ -12,8 +12,8 @@ var Player = React.createClass({
     return (
       <div style={this.props.style}>
         <h2>{player.name}</h2>
-        <div className="player__messagebox">
-          <p className="player-symbol">{player.symbol}</p>
+        <div className="player row">
+          <p className="player__symbol u-pull-left">{player.symbol}</p>
           {this.props.messages.map(this.getMessage)}
         </div>
       </div>

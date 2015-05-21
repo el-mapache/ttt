@@ -17,7 +17,7 @@ var Game = React.createClass({
     var styles = {
       float: index ? 'right' : 'left'
     };
-    
+
     var messages = this.getMessagesFor(player);
 
     return <Player key={index} handleClick={this.deleteMessageFor} messages={messages} style={styles} player={player} />
@@ -26,16 +26,18 @@ var Game = React.createClass({
   render: function() {
     return (
       <div>
-        {this.state.players.map(this.getPlayer)}
+        <div className="row">
+          {this.state.players.map(this.getPlayer)}
+        </div>
         <button type="button" onClick={this.reset}>Reset</button>
         <Board locked={this.state.winner} board={this.state.board} gridSize={3} handleClick={this.handleClick}/>
       </div>
     );
   },
-  
+
   handleClick: function(index, event) {
     var state = this.state;
-    
+
     if (this.state.winner) {
       return;
     }

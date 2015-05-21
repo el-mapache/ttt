@@ -16,11 +16,11 @@ var Board = React.createClass({
 
   render: function() {
     return (
-      <table>
-        <tbody>
+      <section className="row">
+        <div className="twelve columns">
           {this.generateGrid()}
-        </tbody>
-      </table>
+        </div>
+      </section>
       );
     }
 });
