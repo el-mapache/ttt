@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 var assign = require('object-assign');
 
-var Game = require('../lib/Game.js');
+var Game = require('../services/Game.js');
 var GameState = require('../models/GameState.js');
-var AllMessages = require('../lib/Messages.js');
 
 function Player(name, symbol) {
   this.name = name;

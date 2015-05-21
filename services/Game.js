@@ -1,4 +1,4 @@
-var AllMessages = require('../lib/Messages.js');
+var AllMessages = require('../services/Messages.js');
 
 function Game(gameState) {
   var WIN_MAPS = [
