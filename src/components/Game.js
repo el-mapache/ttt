@@ -14,13 +14,30 @@ var Game = React.createClass({
   },
 
   getPlayer: function(player, index) {
-    var styles = {
-      float: index ? 'right' : 'left'
-    };
-
+    var position = index ? 'right' : 'left';
     var messages = this.getMessagesFor(player);
 
-    return <Player key={index} handleClick={this.deleteMessageFor} messages={messages} style={styles} player={player} />
+    return <Player key={index} position={position} handleClick={this.deleteMessageFor} messages={messages} player={player} />
+  },
+
+  getCurrentPlayerName: function() {
+    return this.state.players[this.state.currentPlayer].name;
+  },
+
+  getSystemMessage: function() {
+    var message = '';
+
+    if (this.state.gameOver) {
+      message = 'game over!';
+    } else {
+      message = this.getCurrentPlayerName() + '\'s turn!';
+    }
+
+    return (
+      <div className="row">
+        <h2 className="block-align">{message}</h2>
+      </div>
+    );
   },
 
   render: function() {
@@ -29,7 +46,10 @@ var Game = React.createClass({
         <div className="row">
           {this.state.players.map(this.getPlayer)}
         </div>
-        <button type="button" onClick={this.reset}>Reset</button>
+        {this.getSystemMessage()}
+        <div className="row block-align">
+          <button type="button" onClick={this.reset}>Reset</button>
+        </div>
         <Board locked={this.state.winner} board={this.state.board} gridSize={3} handleClick={this.handleClick}/>
       </div>
     );

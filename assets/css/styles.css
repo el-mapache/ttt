@@ -1,0 +1,133 @@
+#tic-tac-toe {
+  margin-top: 40px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1.5rem;
+}
+
+
+.game__cell {
+  cursor: pointer;
+  border: solid #e0e0dc;
+  border-width: 0 1px 1px 0;
+  padding: 6px;
+  text-align: center;
+  -webkit-box-shadow: 3px 3px 4px #F0F0ED;
+  -moz-box-shadow: 3px 3px 4px #F0F0ED;
+  box-shadow: 3px 3px 4px #F0F0ED;
+  margin-bottom: 15px;
+}
+
+.game__cell p {
+  margin: 2.5rem !important;
+  font-size: 36px;
+  min-height: 58px;
+}
+
+.player__symbol {
+  height: 25px;
+  width: 25px;
+  padding: 2px 2px 4px 2px;
+  background: #4a4a4a;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+.player__name {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 3px;
+}
+
+.player__name:after {
+  content: '';
+  display: block;
+  margin: auto;
+  height: 3px;
+  width: 0px;
+  background: transparent;
+  transition: width .5s ease, background-color .5s ease;
+}
+
+.player__name:hover:after {
+  width: 100%;
+  background: #EAB05E;
+}
+
+.player__symbol-left {
+  margin-right: 20px;
+}
+
+.player__symbol-right {
+  margin-left: 20px;
+}
+
+.player__messagebox, .player__messagebox-left, .player__messagebox-right {
+  border: 2px solid #555;
+  padding: 4px;
+  position: relative;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-top: -3px;
+  transition: opacity .5s ease-in;
+}
+
+.player__messagebox-left:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: 100%;
+  top: 25%;
+  border: 8px solid;
+  border-color: transparent #555 transparent transparent;
+}
+
+.player__messagebox-right:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 100%;
+  top: 25%;
+  border: 8px solid;
+  border-color: transparent transparent transparent #555;
+}
+
+.player__messagebox-close {
+  cursor: pointer;
+  margin: 1px 10px 0 12px;
+  border: 1px solid;
+  border-color: #aaa;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 18px;
+  transition: border-color 0.4s ease;
+  -webkit-transition: border-color 0.4s ease;
+  -moz-transition: border-color 0.4s ease;
+}
+
+.player__messagebox-close:hover {
+  border-color: #555;
+}
+
+.cell-locked {
+  transition: background-color 0.5 ease;
+  -moz-transition: background-color 0.5 ease;
+  -webkit-transition: background-color 0.5 ease;
+}
+.cell-locked:active, .cell-locked:focus {
+  background-color: rgba(230,0,0,0.7);
+  color: white;
+}
+
+.block-align {
+  text-align: center;
+}

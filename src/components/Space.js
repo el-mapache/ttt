@@ -9,7 +9,9 @@ var Space = React.createClass({
     }
 
     return (
-      <div className={classes} onClick={this.handleClick}>{this.props.marker}</div>
+      <div className={classes} onClick={this.handleClick}>
+        <p>{this.props.marker}</p>
+      </div>
     );
   },
 

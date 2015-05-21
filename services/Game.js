@@ -12,8 +12,7 @@ function Game(gameState) {
     [1, 1, null, 1, null, 1, null, 1, 1]
   ];
 
-  // The last turn taken will technically start the 10th turn
-  var MAX_TURNS = gameState.board.length + 1;
+  var MAX_TURNS = gameState.board.length;
 
   function mapSolver(testMap, symbol) {
     return WIN_MAPS.some(function (winMap) {
@@ -81,18 +80,27 @@ function Game(gameState) {
     isWinner: function() {
       var currPlayer = this.getCurrentPlayer();
       var isGameOver = mapSolver(this.state.board, currPlayer.symbol);
+      var self = this;
 
       if (isGameOver) {
         this.state.winner = currPlayer.name;
         this.addMessageTo(currPlayer.name, AllMessages.sampleFrom('win'));
+        this.state.players.forEach(function(player) {
+          if (player.name !== currPlayer.name) {
+            self.addMessageTo(player.name, AllMessages.sampleFrom('lose'));
+          }
+        });
+
+        this.endGame();
+
         return true;
       }
-
       if (this.isLastTurn()) {
-        var self = this;
         this.state.players.forEach(function(player) {
           self.addMessageTo(player.name, AllMessages.sampleFrom('draw'));
         });
+
+        this.endGame();
       }
     },
 
@@ -108,6 +116,8 @@ function Game(gameState) {
     },
 
     addMessageTo: function(player, message) {
+      // TODO refactor to only have a single message as a string at any one time.
+      this.state.messages[player].length = 0;
       this.state.messages[player].push(message);
     },
 
@@ -115,9 +125,12 @@ function Game(gameState) {
       var messages = this.state.messages[player];
 
       return !!(messages && messages.splice(index,1).length);
+    },
+
+    endGame: function() {
+      this.state.gameOver = !this.state.gameOver;
     }
   };
 }
 
 module.exports = Game;
-

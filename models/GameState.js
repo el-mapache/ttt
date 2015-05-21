@@ -5,6 +5,7 @@ module.exports = function() {
     currentTurn: 0,
     currentPlayer: null,
     winner: null,
+    gameOver: false,
     maxPlayers: 2,
     messages: {
       system: []
