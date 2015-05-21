@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lets play TIC TAC TOE!!!!</title>
+    <style>
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+      }
+
+      table {
+        border-spacing: 8px;
+      }
+
+      td {
+        cursor: pointer;
+        border: solid #e0e0dc;
+        border-width: 0 1px 1px 0;
+        padding: 6px;
+        text-align: center;
+        width: 40px;
+        height: 40px;
+        -webkit-box-shadow: 3px 3px 4px #F0F0ED;
+        -moz-box-shadow: 3px 3px 4px #F0F0ED;
+        box-shadow: 3px 3px 4px #F0F0ED;
+      }
+      
+      td.locked:active {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tic-tac-toe"></div>
+
+    <script>
+      function Player(name, symbol) {
+        this.name = name;
+        this.symbol = symbol;
+        this.hasMoved = !!this.hasMoved;
+      }
+
+      Player.prototype.toggleMoved = function() {
+        this.hasMoved = !this.hasMoved;
+      };
+
+      function uniq(list) {
+        return list.reduce(function(memo, item) {
+          if (memo.indexOf(item) === -1) {
+            memo.push(item);
+          }
+          return memo;
+        },[]);
+      };
+
+      var gameState = {
+        board: new Array(9),
+        currentTurn: 0,
+        currentPlayer: null,
+        isWinner: !!this.isWinner
+      }
+
+      var TTT = {
+        players:  [],
+        board: new Array(9),
+        currentTurn: 0,
+        currentPlayer: null,
+        maxPlayers: 2,
+        isWinner: !!this.isWinner,
+        addPlayer: function(player) {
+          if (this.players.length === this.maxPlayers) {
+            throw new Error('Only two players can play TicTacToe.');
+          }
+
+          this.players.push(player);
+        },
+        getNextPlayer: function() {
+          var currPlayerIdx = this.players.indexOf(this.currentPlayer);
+          var nextPlayer = this.players[currPlayerIdx !== 0 ? 0 : 1];
+
+          this.currentPlayer = nextPlayer;
+          return nextPlayer;
+        },
+        start: function() {
+          this.takeTurn();
+        },
+
+        takeTurn: function() {
+          // It takes at least 5 moves to win, so dont check til then
+          if (this.currentTurn >= 5) {
+            this.checkWinner();
+          }
+          this.currentTurn += 1;
+          this.getNextPlayer();
+        },
+        checkWinner: function() {
+          var winMaps = [
+            [null, null, null, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, null, null, null, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, null, null, null],
+            [null, 1, 1, null, 1, 1, null, 1, 1],
+            [1, null, 1, 1, null, 1, 1, null, 1],
+            [1, 1, null, 1, 1, null, 1, 1, null],
+            [null, 1, 1, 1, null, 1, 1, 1, null],
+            [1, 1, null, 1, null, 1, null, 1, 1]
+          ];
+
+          function solver(testMap, symbol) {
+            return winMaps.some(function (winMap) {
+              return winMap.every(function (item, idx) {
+                if (item === null && testMap[idx] === symbol || item === 1) {
+                  return true;
+                }
+                return false;
+              });
+            });
+          }
+
+          var currentPlayerWins = solver(TTT.board, TTT.currentPlayer.symbol);
+          
+          if (currentPlayerWins) {
+            alert(this.currentPlayer.name + ' wins!');
+          }
+        }
+        
+      };
+
+      TTT.addPlayer(new Player('adam', 'x'));
+      TTT.addPlayer(new Player('jane', 'o'));
+      TTT.start();
+
+//      [].slice.call(document.querySelectorAll('td')).forEach(function(el, i) {
+//        var index = i;
+//        el.addEventListener('click', function(event) {
+//          if (!TTT.board[i]) {
+//            TTT.board[i] = event.target.textContent = TTT.currentPlayer.symbol;
+//          }
+//          TTT.takeTurn();
+//        });
+//      });
+    </script>
+    <script src="build/bundle.js"></script>
+  </body>
+</html>
+
